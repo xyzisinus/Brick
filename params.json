@@ -1,0 +1,6 @@
+{
+  "name": "Brick",
+  "tagline": "",
+  "body": "# Brick\r\n\r\n* the problem that brick solves\r\n* how brick presents a solution\r\n* how brick works\r\n  * sparql\r\n  * rdf\r\n  * etc\r\n* how to get brick\r\n* brick examples",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

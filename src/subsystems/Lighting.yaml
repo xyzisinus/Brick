@@ -1,0 +1,28 @@
+Equipment:
+    classes:
+        Lighting:
+            classes:
+                Luminaire:
+                    classes:
+                        Maintained Emergency Luminaire:
+                        Nonmaintained Emergency Luminaire:
+                Luminaire Driver:
+        Interface:
+            classes:
+                Switch:
+                    classes:
+                        Dimmer:
+        Touchpanel:
+Point:
+    classes:
+        Sensor:
+            classes:
+                Occupancy Sensor:
+                    classes:
+                        Motion Sensor:
+                            classes:
+                                Passive Infrared Motion Sensor:
+                                    hasSynonyms: [PIR Sensor]
+                Illuminance Sensor:
+                    classes:
+                        Photocell Illuminance Sensor:

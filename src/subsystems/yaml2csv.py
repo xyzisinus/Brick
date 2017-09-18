@@ -30,4 +30,4 @@ def expand(d, prefix=""):
 for r in expand(d):
     tagsets = tagsets.append(r, ignore_index=True)
     print r
-tagsets.to_csv('TagSets.csv',index=False)
+tagsets.to_csv('../TagSets.csv',index=False)

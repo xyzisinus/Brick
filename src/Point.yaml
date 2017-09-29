@@ -4,7 +4,7 @@ Point:
         Command:
         Meter:
         Sensor:
-            types:
+            subclasses:
                 CO2 Sensor:
                     media: [Air]
                     types: [Outside, Return]
@@ -13,6 +13,13 @@ Point:
                         CO2 Level Sensor:
                 Damper Position Sensor:
                     types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
+                Zone Temperature Sensor:
+                    subclasses:
+                        Average Zone Temperature Sensor,
+                        Highest Zone Temperature Sensor
+                            synonyms: Warmest Zone Temperature Sensor
+                        Lowest Zone Temperature Sensor
+                            synonyms: Coldest Zone Temperature Sensor
                 Temperature Sensor:
                     media:
                         - Air:
@@ -69,25 +76,17 @@ Point:
                                                 Medium Temperature Hot Water Return Temperature Sensor:
                                         Chilled Water Return Temperature Sensor:
 
-                    subclasses:
-                        Cold Box Temperature Sensor:
-                        Condensor Temperature Sensor:
-                        CRAC Temperature Sensor:
-                        Drive Temperature Sensor:
-                        Differential Temperature Sensor:
-                        Environment Box Temperature Sensor:
-                        Freezer Temperature Sensor:
-                        Hot Box Temperature Sensor:
-                        Room Temperature Sensor:
-                        Underfloor Temperature Sensor:
+                Cold Box Temperature Sensor:
+                Condensor Temperature Sensor:
+                CRAC Temperature Sensor:
+                Drive Temperature Sensor:
+                Differential Temperature Sensor:
+                Environment Box Temperature Sensor:
+                Freezer Temperature Sensor:
+                Hot Box Temperature Sensor:
+                Room Temperature Sensor:
+                Underfloor Temperature Sensor:
 
-                        Zone Temperature Sensor:
-                            subclasses:
-                                Average Zone Temperature Sensor,
-                                Highest Zone Temperature Sensor
-                                    synonyms: Warmest Zone Temperature Sensor
-                                Lowest Zone Temperature Sensor
-                                    synonyms: Coldest Zone Temperature Sensor
 
         Setpoint:
         Status:

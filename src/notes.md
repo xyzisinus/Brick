@@ -152,3 +152,73 @@ which would then produce
 At this point, we have the following issues:
 1. what are the keys we use to enumerate the tag dimensions (e.g. media, types, etc?)
 2. what is the relationship between tag-generated tagsets and explicit subclasses
+
+
+What are the keys we use to enumerate the tag dimensions (e.g. media, types, etc?)
+
+use the following for an example:
+    Medium Temperature Hot Water Supply Temperature Sensor
+
+    media: water
+    types: medium temperature hot supply ?
+
+------
+
+
+What is the relationship between tag-generated tagsets and explicit subclasses?
+
+Classes and subclasses contain full names.
+Various tags can be associated with a class. So far there are two dimensions of tags:
+- media: air, water, etc
+- types: additional modifiers for the above: outside, return, supply, etc
+
+Per the YAML format, we can specify tags like this
+
+```yaml
+types: [Outside, Return, Supply]
+```
+
+which is helpful if there's no extra information about those types.
+
+However, we may want to attach certain properties to specific tags.
+In that case, we can use an alternate YAML format to present the list of tags
+as a list of dictionaries. We can have subclasses OR other tags (types and media)
+here. Its basically just like writing classes, but you can be a little more succinct,
+and its easier to see the structure. Its best to specify the classes directly if they
+are super specific and you want to compress the nesting of tags it would take to generate that name.
+
+```yaml
+Temperature Sensor:
+    media:
+        - Air:
+            types:
+                - Discharge
+                - Zone
+                - Exhaust
+    subclasses:
+        Outside Air Lockout Temperature Differential Sensor:
+```
+
+generates the following:
+
+```
+Temperature Sensor
+Air Temperature Sensor
+Discharge Air Temperature Sensor
+Zone Air Temperature Sensor
+Exhaust Air Temperature Sensor
+Outside Air Lockout Temperature Differential Sensor:
+```
+
+Now all together:
+
+```
+Sensor:         # <--- class name; standalone (i.e. this is the name in brick)
+    subclasses:  # <-- list of subclasses
+        CO2 Sensor:     # <--- class name; standalone name
+            media: [Air]  # <--- media name. This is a tag that gets placed before the subclass name
+            types: [Outside, Return]  # <---  cross product of these names with media types gives additional subclasses
+            subclasses:                     # <-- these subclasses are specified explicitly and in addition to those
+                CO2 Differential Sensor:    #     created by the cross product of media and types
+                CO2 Level Sensor:
+```

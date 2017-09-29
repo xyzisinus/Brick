@@ -1,29 +1,3 @@
-Goal is to have a declarative specification that generates a consistent collection of tagsets
-
-Example from keith:
-
-    Zone_air_temperature:
-      setpoint_states:[[occupied,unoccupied],[heating,cooling]]
-        alarms: true
-
-Some issues with the hierarchy:
-
-- really two things we want to communicate:
-    1. what kind of system is a tagset *associated* with:
-        - use "is Part Of"; maybe as part of the Brick definition?
-    2. increasing levels of specificity/functionality:
-        - this is really what classes are for. Valve -> Heating Valve, for example
-
-- the class hierarchy is co-opting the structure to do the former. This is BAD!:
-    - for example, subclasses of an AHU include a "preheat valve VFD"
-- going to need to switch to some other kind of relationship for this:
-    - maybe "usesEquipment"; this gets inherited DOWN the hierarchy
-    - the "compiler" throws an exception/error if the target of "usesEquipment" is
-      not defined elsewhere in Brick
-
-
-How to do the declarative specification:
-
 ## subclasses
 
 ```yaml
@@ -182,12 +156,15 @@ here. Its basically just like writing classes, but you can be a little more succ
 and its easier to see the structure. Its best to specify the classes directly if they
 are super specific and you want to compress the nesting of tags it would take to generate that name.
 
+Below, we also use tag synonyms (using the `synonym` attribute). This will copy all classes under this heading, but replace the tag with its synonyms.
+
 ```yaml
 Temperature Sensor:
     media:
         - Air:
             types:
-                - Discharge
+                - Discharge:
+                    synonyms: [Supply]
                 - Zone
                 - Exhaust
     subclasses:
@@ -200,6 +177,7 @@ generates the following:
 Temperature Sensor
 Air Temperature Sensor
 Discharge Air Temperature Sensor
+Supply Air Temperature Sensor
 Zone Air Temperature Sensor
 Exhaust Air Temperature Sensor
 Outside Air Lockout Temperature Differential Sensor:

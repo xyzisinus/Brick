@@ -26,7 +26,7 @@ How to do the declarative specification:
 
 ## subclasses
 
-```
+```yaml
     Point:
         subclasses:
             Alarm:
@@ -56,7 +56,7 @@ Point>Sensor>CO2 Sensor,Return Air CO2 Sensor,
 
 So far we have:
 
-```
+```yaml
 Point:
     subclasses:
         Sensor:
@@ -71,19 +71,20 @@ Point:
 
 This is exploring the possibility of parameterizing the construction of tagsets. For CO2 sensor,
 the produced tagsets would be the cross product of "media" and "types":
-    - Outside Air CO2 Sensor
-    - Return Air CO2 Sensor
-Augemented by the further subclasses
-    - CO2 Differential Sensor
-    - CO2 Level Sensor
-    - Return Air CO2 Differential Sensor
-    - Outside Air CO2 Differential Sensor
-    - Return Air CO2 Level Sensor
-    - Outside Air CO2 Level Sensor
+- Outside Air CO2 Sensor
+- Return Air CO2 Sensor
+
+Augemented by the further subclasses:
+- CO2 Differential Sensor
+- CO2 Level Sensor
+- Return Air CO2 Differential Sensor
+- Outside Air CO2 Differential Sensor
+- Return Air CO2 Level Sensor
+- Outside Air CO2 Level Sensor
 
 it might be more consistent to describe the above using:
 
-```
+```yaml
 Point:
     subclasses:
         Sensor:
@@ -96,7 +97,7 @@ Point:
 
 If one of our subtypes has additional subtypes, we could do
 
-```
+```yaml
 Point:
     subclasses:
         Sensor:
@@ -110,21 +111,21 @@ Point:
                         - Level
 ```
 
-which would then produce
-    - Outside Air CO2 Sensor
-    - Return Air CO2 Sensor
-    - Return Air CO2 Differential Sensor
-    - Return Air CO2 Inverse Differential Sensor  <--- new
-    - Outside Air CO2 Differential Sensor
-    - Outside Air CO2 Inverse Differential Sensor  <--- new
-    - Return Air CO2 Level Sensor
-    - Outside Air CO2 Level Sensor
+which would then produce:
+- Outside Air CO2 Sensor
+- Return Air CO2 Sensor
+- Return Air CO2 Differential Sensor
+- Return Air CO2 Inverse Differential Sensor  **<--- new**
+- Outside Air CO2 Differential Sensor
+- Outside Air CO2 Inverse Differential Sensor  **<--- new**
+- Return Air CO2 Level Sensor
+- Outside Air CO2 Level Sensor
 
 This is all well and good until we run into a scenario where we have subtypes for only one of our types.
 Luckily, we can use YAML's flexible syntax to expand out the "types" list and give subtypes to only
 one element of that list.
 
-```
+```yaml
 Point:
     subclasses:
         Sensor:
@@ -140,12 +141,12 @@ Point:
                                 - Level
 ```
 
-which would then produce
-    - Outside Air CO2 Sensor
-    - Return Air CO2 Sensor
-    - Return Air CO2 Differential Sensor
-    - Return Air CO2 Inverse Differential Sensor
-    - Return Air CO2 Level Sensor
+which would then produce:
+- Outside Air CO2 Sensor
+- Return Air CO2 Sensor
+- Return Air CO2 Differential Sensor
+- Return Air CO2 Inverse Differential Sensor
+- Return Air CO2 Level Sensor
 
 ---
 
@@ -155,12 +156,6 @@ At this point, we have the following issues:
 
 
 What are the keys we use to enumerate the tag dimensions (e.g. media, types, etc?)
-
-use the following for an example:
-    Medium Temperature Hot Water Supply Temperature Sensor
-
-    media: water
-    types: medium temperature hot supply ?
 
 ------
 

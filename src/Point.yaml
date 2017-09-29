@@ -14,12 +14,12 @@ Point:
                 Damper Position Sensor:
                     types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
                 Zone Temperature Sensor:
-                    subclasses:
-                        Average Zone Temperature Sensor,
-                        Highest Zone Temperature Sensor
-                            synonyms: Warmest Zone Temperature Sensor
-                        Lowest Zone Temperature Sensor
-                            synonyms: Coldest Zone Temperature Sensor
+                    types:
+                        - Average
+                        - Highest:
+                            synonyms: Warmest
+                        - Lowest:
+                            synonyms: Coldest
                 Temperature Sensor:
                     media:
                         - Air:

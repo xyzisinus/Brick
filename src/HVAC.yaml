@@ -1,0 +1,92 @@
+Equipment:
+    subclasses:
+        HVAC:
+            subclasses:
+
+                Air Handler Unit:
+                    synonyms: [AHU]
+                    usesEquipment: [Heat Wheel VFD, Preheat Valve VFD, Preheat Hot Water Valve]
+
+                Chilled Water System:
+                    synonyms: [CWS]
+                    usesEquipment: [Cooling Coil]
+                    subclasses:
+                        Cooling Tower:
+
+                Heat Exchanger:
+                    synonyms: [HX]
+                    usesEquipment: [Heating Coil]
+
+                Coil:
+                    subclasses:
+                        Cooling Coil:
+                        Heating Coil:
+
+                Compressor:
+
+                Computer Room Air Conditioning:
+                    synonyms: [CRAC]
+                    subclasses:
+                        Standby CRAC Unit:
+                        Emergency Power Off System:
+
+                Condenser:
+
+                Boiler:
+
+                Damper:
+                    dimensions:
+                        types: [Economizer, Exhaust, Outside, Return]
+
+                Economizer:
+
+                Fan:
+                    dimensions:
+                        types: [Cooling Tower, Exhaust, Return, Standby, Supply]
+                        types2:
+                            Supply:
+                                subclasses:
+                                    Booster Fan:
+
+                Filter:
+                    subclasses:
+                        Mixed Air Filter:
+
+                Fume Hood:
+
+                Pump:
+                    subclasses:
+                        Chilled Water Pump:
+                        Hot Water Pump:
+
+                Space Heater:
+
+                Terminal Unit:
+                    subclasses:
+                        Fan Coil Unit:
+                            synonyms: [FCU]
+                        Variable Air Volume Box:
+                            synonyms: [VAV]
+                            usesEquipment: [Damper]
+                            subclasses:
+                                Variable Air Volume Box With Reheat:
+                                    synonyms: [RVAV]
+                                    usesEquipment: [Heating Coil]
+
+                Thermostat:
+
+                Valve:
+                    subclasses:
+                        Cooling Valve:
+                        Heating Valve:
+                            subclasses:
+                                Domestic Hot Water Valve:
+                                Reheat Valve:
+                                Preheat Hot Water Valve:
+                                    usesEquipment: [Preheat Valve VFD]
+
+                Variable Frequency Drive:
+                    subclasses:
+                        Heat Wheel VFD:
+                        Preheat Valve VFD:
+

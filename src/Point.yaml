@@ -1,0 +1,25 @@
+Point:
+    subclasses:
+        Alarm:
+        Command:
+        Meter:
+        Sensor:
+            types:
+                CO2:
+                    media: [Air]
+                    types: [Outside, Return]
+                    subclasses:
+                        CO2 Differential Sensor:
+                        CO2 Level Sensor:
+                Damper:
+                    subclasses:
+                        Damper Position Sensor:
+                            types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
+                Temperature:
+                    subclasses:
+                        Cold Box Temperature Sensor:
+                        Environment Box Temperature Sensor:
+                        Hot Box Temperature Sensor:
+                        Air Temperature Sensor:
+        Setpoint:
+        Status:

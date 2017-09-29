@@ -5,21 +5,89 @@ Point:
         Meter:
         Sensor:
             types:
-                CO2:
+                CO2 Sensor:
                     media: [Air]
                     types: [Outside, Return]
                     subclasses:
                         CO2 Differential Sensor:
                         CO2 Level Sensor:
-                Damper:
-                    subclasses:
-                        Damper Position Sensor:
-                            types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
-                Temperature:
+                Damper Position Sensor:
+                    types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
+                Temperature Sensor:
+                    media:
+                        - Air:
+                            types:
+                                - Discharge:
+                                    synonyms: [Supply]
+                                    subclasses:
+                                        Cooling Coil Discharge Air Temperature Sensor:
+                                        Heat Wheel Discharge Air Temperature Sensor:
+                                        Preheat Discharge Air Temperature Sensor:
+                                - Zone
+                                - Exhaust
+                                - Mixed
+                                - Return
+                                - Outside:
+                                    subclasses:
+                                        Outside Air Lockout Temperature Differential Sensor:
+                                            types: [Low, High]
+
+                        - Water:
+                            types:
+                                - Supply:
+                                    synonyms: [Discharge]
+                                    subclasses:
+                                        Chilled Water Supply Temperature Sensor:
+                                        Chilled Water Discharge Temperature Sensor:
+                                        Heat Exchanger Supply Water Temperature Sensor:
+                                            synonyms: Heat Exchanger Discharge Water Temperature Sensor
+                                        Hot Water Supply Temperature Sensor:
+                                            synonyms: Hot Water Discharge Temperature Sensor
+                                            subclasses:
+                                                Domestic Hot Water Supply Temperature Sensor:
+                                                    synonyms: Domestic Hot Water Discharge Temperature Sensor
+                                                High Temperature Hot Water Supply Temperature Sensor:
+                                                    synonyms: High Temperature Hot Water Discharge Temperature Sensor
+                                                Medium Temperature Hot Water Supply Temperature Sensor:
+                                                    synonyms: Medium Temperature Hot Water Discharge Temperature Sensor
+                                - Chilled:
+                                    types: [Differential]
+                                - Entering:
+                                    subclasses:
+                                        Hot Water Coil Entering Temperature Sensor:
+                                        Ice Tank Entering Water Temperature Sensor:
+                                        PreHeat Coil Entering Air Temperature Sensor:
+                                - Leaving:
+                                    subclasses:
+                                        Ice Tank Leaving Water Temperature Sensor:
+                                        PreHeat Coil Leaving Water Temperature Sensor:
+                                - Return:
+                                    subclasses:
+                                        Hot Water Return Temperature Sensor:
+                                            subclasses:
+                                                High Temperature Hot Water Return Temperature Sensor:
+                                                Medium Temperature Hot Water Return Temperature Sensor:
+                                        Chilled Water Return Temperature Sensor:
+
                     subclasses:
                         Cold Box Temperature Sensor:
+                        Condensor Temperature Sensor:
+                        CRAC Temperature Sensor:
+                        Drive Temperature Sensor:
+                        Differential Temperature Sensor:
                         Environment Box Temperature Sensor:
+                        Freezer Temperature Sensor:
                         Hot Box Temperature Sensor:
-                        Air Temperature Sensor:
+                        Room Temperature Sensor:
+                        Underfloor Temperature Sensor:
+
+                        Zone Temperature Sensor:
+                            subclasses:
+                                Average Zone Temperature Sensor,
+                                Highest Zone Temperature Sensor
+                                    synonyms: Warmest Zone Temperature Sensor
+                                Lowest Zone Temperature Sensor
+                                    synonyms: Coldest Zone Temperature Sensor
+
         Setpoint:
         Status:

@@ -1,0 +1,37 @@
+Point:
+    subclasses:
+        Alarm:
+        Command:
+        Meter:
+        Sensor:
+            subclasses:
+                CO2 Sensor:
+                    media: [Air]
+                    types: [Outside, Return]
+                    subclasses:
+                        CO2 Differential Sensor:
+                        CO2 Level Sensor:
+                Damper Position Sensor:
+                    types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
+                Temperature Sensor:
+                    media:
+                        - Air:
+                            types:
+                                - Discharge:
+                                    synonyms: [Supply]
+                                    subclasses:
+                                        Cooling Coil Discharge Air Temperature Sensor:
+                                        Heat Wheel Discharge Air Temperature Sensor:
+                                        Preheat Discharge Air Temperature Sensor:
+                                - Zone:
+                                    types:
+                                        - Average
+                                        - Highest
+                                        - Lowest
+                                - Exhaust
+                                - Mixed
+                                - Return
+                                - Outside:
+                                    subclasses:
+                                        Outside Air Lockout Temperature Differential Sensor:
+                                            types: [Low, High]

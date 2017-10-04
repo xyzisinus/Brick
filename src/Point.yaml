@@ -17,9 +17,9 @@ Point:
                     types:
                         - Average
                         - Highest:
-                            synonyms: Warmest
+                            synonyms: [Warmest]
                         - Lowest:
-                            synonyms: Coldest
+                            synonyms: [Coldest]
                 Temperature Sensor:
                     media:
                         - Air:

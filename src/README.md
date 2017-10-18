@@ -136,9 +136,9 @@ Zone Temperature Sensor:
     types:
         - Average
         - Highest:
-            synonyms: Warmest
+            synonyms: [Warmest] # should be a list
         - Lowest:
-            synonyms: Coldest
+            synonyms: [Coldest]
 ```
 
 generates

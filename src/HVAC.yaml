@@ -6,16 +6,21 @@ Equipment:
                 Air Handler Unit:
                     synonyms: [AHU]
                     usesEquipment: [Heat Wheel VFD, Preheat Valve VFD, Preheat Hot Water Valve]
-
-                Chilled Water System:
-                    synonyms: [CWS]
-                    usesEquipment: [Cooling Coil]
                     subclasses:
-                        Cooling Tower:
+                        Rooftop Unit:
+                            synonyms: [RTU]
+
+                Cooling Tower:
+
+                Chiller:
+                    types: [Absorption, Centrifugal]
 
                 Heat Exchanger:
                     synonyms: [HX]
                     usesEquipment: [Heating Coil]
+                    subclasses:
+                        Evaporator:
+                        Condenser:
 
                 Coil:
                     subclasses:
@@ -30,8 +35,6 @@ Equipment:
                         Standby CRAC Unit:
                         Emergency Power Off System:
 
-                Condenser:
-
                 Boiler:
 
                 Damper:
@@ -42,12 +45,14 @@ Equipment:
 
                 Fan:
                     dimensions:
-                        types: [Cooling Tower, Exhaust, Return, Standby, Supply]
-                        types2:
-                            Supply:
+                        types:
+                            - Cooling Tower
+                            - Exhaust
+                            - Return
+                            - Standby
+                            - Supply:
                                 subclasses:
-                                    Booster Fan:
-
+                                    Booster Fan
                 Filter:
                     subclasses:
                         Mixed Air Filter:
@@ -55,9 +60,9 @@ Equipment:
                 Fume Hood:
 
                 Pump:
-                    subclasses:
-                        Chilled Water Pump:
-                        Hot Water Pump:
+                    media:
+                        - Water:
+                            types: [Chilled, Condenser, Hot]
 
                 Space Heater:
 
@@ -89,4 +94,3 @@ Equipment:
                     subclasses:
                         Heat Wheel VFD:
                         Preheat Valve VFD:
-

@@ -5,6 +5,51 @@ from collections import defaultdict
 
 d = yaml.load(open(sys.argv[1]))
 
+#### BRICK part
+from rdflib import Graph, Namespace, URIRef, Literal
+import rdflib
+RDF = Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#')
+RDFS = Namespace('http://www.w3.org/2000/01/rdf-schema#')
+OWL = Namespace('http://www.w3.org/2002/07/owl#')
+BRICK = Namespace('https://brickschema.org/schema/1.0.1/Brick#')
+BF = Namespace('https://brickschema.org/schema/1.0.1/BrickFrame#')
+BRICKTAG = Namespace('https://brickschema.org/schema/1.0.1/BrickTag#')
+g = rdflib.Graph()
+g.bind('rdf', RDF)
+g.bind('rdfs', RDFS)
+g.bind('brick', BRICK)
+g.bind('bf', BF)
+g.bind('btag', BRICKTAG)
+
+def fix_name(name):
+    name = name.replace(' ','_')
+    return name
+
+def emit_class(name):
+    name = fix_name(name)
+    #g.add((BRICK[name], RDF.type, OWL.Class))
+    pass
+
+def emit_subclass(name, parentname):
+    name = fix_name(name)
+    parentname = fix_name(parentname)
+    emit_class(name)
+    emit_class(parentname)
+    g.add((BRICK[name], RDFS.subClassOf, BRICK[parentname]))
+    pass
+
+def emit_synonym(name, synonym):
+    name = fix_name(name)
+    synonym = fix_name(synonym)
+    if name == synonym:
+        return
+    emit_class(name)
+    emit_class(synonym)
+    g.add((BRICK[name], BF.equivalentTagSet, BRICK[synonym]))
+    pass
+
+##########################################
+
 def list_keys(d):
     things = d if isinstance(d, list) else d.keys()
     newthings = []
@@ -28,7 +73,8 @@ def get_key(d, key):
 def subclass_expand(d, superclass):
     subclasses = []
     for subclass, defn in d.items():
-        print superclass,'->',subclass
+        print 'se',superclass,'->',subclass
+        emit_subclass(subclass, superclass)
         subclasses.append(subclass)
         subclasses.extend(expand(defn, subclass))
     return subclasses
@@ -43,7 +89,8 @@ def media_expand(d, superclass):
     for medium in mediaclasses:
         tagsuperclass = '{0} {1}'.format(medium, superclass)
         subclasses.append(tagsuperclass)
-        print superclass,'->',tagsuperclass
+        print '1',superclass,'->',tagsuperclass
+        emit_subclass(tagsuperclass, superclass)
         if get_key(d, medium) is not None:
             subclasses.extend(expand(get_key(d, medium), tagsuperclass))
     print 
@@ -60,12 +107,14 @@ def type_expand(d, tagclasses=None, superclass=None):
                 _newclass = '{0} {1}'.format(typeclass, tagclass)
                 type_to_subclasses[typeclass].append(_newclass)
                 print 'tt',superclass,'->',_newclass
+                emit_subclass(_newclass, superclass)
                 subclasses.append(_newclass)
 
     if superclass is not None:
         for typeclass in types:
             _newclass = '{0} {1}'.format(typeclass, superclass)
-            print superclass,'->',_newclass
+            print 'st',superclass,'->',_newclass
+            emit_subclass(_newclass, superclass)
             type_to_subclasses[typeclass].append(_newclass)
             subclasses.append(_newclass)
 
@@ -79,13 +128,19 @@ def type_expand(d, tagclasses=None, superclass=None):
 def synonym_expand(synonyms, tag, tagclasses):
     newtagclasses = []
     for synonym in synonyms:
+        if len(tagclasses) == 0:
+            emit_synonym(tag, synonym)
         for tagclass in tagclasses:
-            newtagclasses.append(tagclass.replace(tag, synonym))
+            synonymclass = tagclass.replace(tag, synonym)
+            newtagclasses.append(synonymclass)
+            emit_synonym(tagclass, synonymclass)
     return newtagclasses
 
 def expand(d, superclass=None, tagclasses=None, supertag=None):
     #print 'expand({0}, superclass={1}, tagclasses={2}, supertag={3}'.format(d, superclass, tagclasses, supertag)
     subclasses = []
+    if supertag is None:
+        supertag = superclass
 
     if tagclasses is None:
         tagclasses = []
@@ -111,3 +166,6 @@ for r, defn in d.items():
     print '-'*10
     print r
     pprint(expand(defn, r))
+
+g.serialize(destination='Brick.ttl',format='turtle')
+print len(g)

@@ -1,28 +1,28 @@
 Equipment:
-    classes:
+    subclasses:
         Lighting:
-            classes:
+            subclasses:
                 Luminaire:
-                    classes:
+                    subclasses:
                         Maintained Emergency Luminaire:
                         Nonmaintained Emergency Luminaire:
                 Luminaire Driver:
         Interface:
-            classes:
+            subclasses:
                 Switch:
-                    classes:
+                    subclasses:
                         Dimmer:
         Touchpanel:
-Point:
-    classes:
-        Sensor:
-            classes:
-                Occupancy Sensor:
-                    classes:
-                        Motion Sensor:
-                            classes:
-                                Passive Infrared Motion Sensor:
-                                    hasSynonyms: [PIR Sensor]
-                Illuminance Sensor:
-                    classes:
-                        Photocell Illuminance Sensor:
+#Point:
+#    classes:
+#        Sensor:
+#            classes:
+#                Occupancy Sensor:
+#                    classes:
+#                        Motion Sensor:
+#                            classes:
+#                                Passive Infrared Motion Sensor:
+#                                    hasSynonyms: [PIR Sensor]
+#                Illuminance Sensor:
+#                    classes:
+#                        Photocell Illuminance Sensor:

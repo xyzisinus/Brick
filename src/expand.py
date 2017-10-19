@@ -27,7 +27,10 @@ def fix_name(name):
 
 def emit_class(name):
     name = fix_name(name)
-    #g.add((BRICK[name], RDF.type, OWL.Class))
+    g.add((BRICK[name], RDF.type, OWL.Class))
+    #for tag in name.split('_'):
+    #    g.add((BRICKTAG[tag], RDF.type, BF["Tag"]))
+    #    g.add((BRICK[name], BF.usesTag, BRICKTAG[tag]))
     pass
 
 def emit_subclass(name, parentname):

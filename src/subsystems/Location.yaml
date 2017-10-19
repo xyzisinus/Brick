@@ -1,0 +1,21 @@
+Location:
+    subclasses:
+        Building:
+        Floor:
+        Roof:
+        Basement:
+        Outside:
+        City:
+        Wing:
+        Space:
+        Room:
+            subclasses:
+                Laboratory:
+                    subclasses:
+                        Freezer:
+                        Cold Box:
+                        Environment Box:
+                        Hot Box:
+                Server Room:
+        Zone:
+            types: [HVAC, Lighting, Fire]

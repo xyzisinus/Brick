@@ -1,29 +1,29 @@
 # Dimension (class hierarchy) | TagSet | Definition | Reference | TagSet Decomposition | usesEquipment | isPartOf | hasSynonym | hasUnit | hasAbbreviation
 
 Equipment:
-    classes:
+    subclasses:
       Power System:
-        classes:
+        subclasses:
             Isolator:
               Definition: local device to turn off power for maintenance
             Protection Device:
-                classes:
+                subclasses:
                     Circuit Breaker:
                         hasSynonyms: [Fuse]
             Bus:
-                classes:
+                subclasses:
                     Circuit:
                         Definition: specific supply from distribution panel
                     Distribution Board:
                         hasSynonyms: [Circuit Panel, Consumer Unit]
                     Panel Board:
                         hasSynonyms: [Switch Board]
-                        classes:
+                        subclasses:
                             High Voltage Switch Board:
                                 Definition: high voltage switch board
 
             Generator:
-                classes:
+                subclasses:
                     Photovoltaic System:
                         hasSynonyms: [PV System]
             Rectifier:

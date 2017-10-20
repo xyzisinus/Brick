@@ -1,0 +1,161 @@
+Point:
+    subclasses:
+        Setpoint:
+            types:
+                - Temperature:
+                    subclasses:
+                        Economizer Temperature Setpoint:
+                        Schedule Temperature Setpoint:
+                        Low Temperature Alarm Setpoint:
+                    media:
+                          - Air:
+                                types:
+                                  - Discharge:
+                                      synonyms: [Supply]
+                                      subclasses:
+                                          Discharge Air Heating Setpoint:
+                                              synonyms: [Min Discharge Air Setpoint]
+                                              types: [Effective, Unoccupied, Occupied]
+                                          Discharge Air Cooling Setpoint:
+                                              synonyms: [Max Discharge Air Setpoint]
+                                              types: [Effective, Unoccupied, Occupied]
+                                  - Mixed
+                                  - Zone
+                                  - Room
+                                  - Outside:
+                                      subclasses:
+                                        Low Outside Air Temperature Enable Setpoint:
+                                        Open Heating Valve Outside Air Temperature Setpoint:
+                                        Outside Air Lockout Temperature Setpoint:
+                                  - Alarm:
+                                      types: [High, Low]
+                          - Water:
+                              types:
+                                - Supply:
+                                    synonyms: [Discharge]
+                - CO2:
+                    media:
+                        - Air:
+                            types:
+                                - Return:
+                                    types: [Max]
+                - Luminance
+                - Alarm Delay:
+                    types:
+                        - Pump:
+                            media:
+                                - Water:
+                                    types: [Chilled]
+                - Current Limit
+                - Humidity:
+                    types:
+                        - Alarm:
+                            types: [High]
+
+                - Speed:
+                    types:
+                        - Rated
+                        - VFD:
+                            types:
+                                - Return
+                                - Supply:
+                                    synonyms: [Discharge]
+                - Flow:
+                    media:
+                        - Air:
+                            types:
+                                - Fan:
+                                    types: [Booster, Exhaust]
+                                - Discharge:
+                                    synonyms: [Supply]
+                                    types:
+                                        - Heating:
+                                            - Min
+                                            - Max
+                                            - Occupied:
+                                                types: [Min, Max]
+                                        - Cooling:
+                                            - Min
+                                            - Max
+                                            - Occupied:
+                                                types: [Min, Max]
+                                - Outside:
+                                    types:
+                                        - Economizer
+                                        - Min
+                                - Exhaust:
+                                    subclasses:
+                                        Exhaust Air Stack Flow Setpoint:
+
+                        - Water
+                - Damper Position:
+                    media:
+                        - Air:
+                            types:
+                                - Outside:
+                                    types: [Min, Close, Max]
+                                - Supply:
+                                    synonyms: [Dischare]
+                                    types: [Min, Max]
+
+                - Load
+                - Mode
+                - Pressure:
+                    types:
+                        Differential:
+                            media:
+                                - Water:
+                                    types:
+                                        - Chilled:
+                                            types: [Min, Max]
+                                        - Hot
+                                    subclasses:
+                                        Load Shed Differential Pressure Setpoint:
+                                            subclasses:
+                                                Medium Temperature Hot Water Differential Pressure Load Shed Setpoint:
+                        Static:
+                            subclasses:
+                                - High Static Pressure Cutout Limit Setpoint
+                            media:
+                                - Air:
+                                    types:
+                                        - Building
+                                        - Exhaust
+                                        - Discharge:
+                                            synonyms: [Supply]
+                                            types: [Min, Max]
+                                - Water:
+                                    types:
+                                        - Chilled
+                                        - Hot
+                                        - Min
+                                        - Max
+
+                        Velocity:
+                - Demand
+                - Dew Point:
+                    types:
+                        - Economizer:
+                            types:
+                                - Fixed:
+                                    types: [Enable, Disable]
+
+                - Enthalpy:
+                    types:
+                        - Economizer:
+                            types:
+                                - Enable:
+                                    types: [Fixed, Differential]
+                                - Disable:
+                                    types: [Fixed, Differential]
+                - Fresh Air:
+                    subclasses:
+                        Ventilation Air Flow Ratio Limit Setpoint:
+                    types:
+                        - Min
+                - Time:
+                    types:
+                        - Acceleration
+                        - Deceleration
+        Status:
+

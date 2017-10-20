@@ -1,171 +1,108 @@
 # Declarative Specification of Brick Hierarchy
 
+## Dimensions
 
-Goal is to have a declarative specification that generates a consistent collection of tagsets
-
-## Issues
-
-Some issues with the hierarchy:
-
-- really two things we want to communicate:
-    1. what kind of system is a tagset *associated* with:
-        - use "is Part Of"; maybe as part of the Brick definition?
-    2. increasing levels of specificity/functionality:
-        - this is really what classes are for. Valve -> Heating Valve, for example
-
-- the class hierarchy is co-opting the structure to do the former. This is BAD!:
-    - for example, subclasses of an AHU include a "preheat valve VFD"
-- going to need to switch to some other kind of relationship for this:
-    - maybe "usesEquipment"; this gets inherited DOWN the hierarchy
-    - the "compiler" throws an exception/error if the target of "usesEquipment" is
-      not defined elsewhere in Brick
-
-## Subclasses
-
-### Simple Hierarchy
-
-```yaml
-Point:
-    subclasses:
-        Alarm:
-        Command:
-        Meter:
-        Sensor:
-```
-
-Class names are "complete". They are not composed or altered in anyway as we follow `subclasses` tags down the structure.
+When we have a tag or a class in the specification, we can "subclass" it along several dimensions.
 
 
-### Parameterizing with Tags
+#### Media
 
-As the hierarchy gets deeper and more complex, we would like to use tags to describe what these classes are in a more structured and less error-prone manner.
+The physical medium a point or piece of equipment operates over.
 
-```yaml
-Point:
-    subclasses:
-        Sensor:
-            types:
-                CO2:
-                    media: [Air]
-                    types: [Outside, Return]
-                    subtypes: [Differential, Level]
-```
+Common values are `Water`,`Air`,`Electricity`,`CO2`.
 
-Here, the immediate subclass of `Sensor` is `CO2`; following tag composition rules, the generated class name becomes `CO2 Sensor`. The subclasses of `CO2 Sensor` are those formed by the cross product of `media` and `types`. Per tag composition rules, `media` gets placed closest to the parent class name.
+---
 
-For each of these, the `subtypes` generates a new set of subclasses.
+Quick Discussion:  what's the difference between types and modifiers?
 
-The resulting set of classes are below, with nesting indicating subclassing:
-- `Point`
-    - `Sensor`
-        - `CO2 Sensor`
-            - `Outside Air CO2 Sensor`
-                - `Differential Outside Air CO2 Sensor`
-                - `Level Outside Air CO2 Sensor`
-            - `Return Air CO2 Sensor`
-                - `Differential Return Air CO2 Sensor`
-                - `Level Return Air CO2 Sensor`
+As Keith proposed:
+modifiers: [Hot, Chilled, Condenser]
+types: [Discharge, Return]
 
-If we want to specify "subtypes" for just one of the tags, we can use the normal "types" structure:
+but what's the distinction here?
 
-```yaml
-Point:
-    subclasses:
-        Sensor:
-            types:
-                CO2:
-                    media: [Air]
-                    types:
-                        - Outside
-                            types: [Differential, Level]
-                        - Return
-```
+Gabe proposal:
 
-which would generate
+How do we qualify a sensor or a piece of equipment?
+
+- along which media it is concerned with:
+    - water, air, electricity, co2, etc
+- what 'flavor' of media it is concerned with: (keith calls this modifier)
+    - condensed, chilled, hot (water)
+    - outside, high, low (air)
+- something about how that point/equipment is positioned in the operational flow:
+    - discharge, zone, supply, return
+    - can we call this the "function"? the "type"?
+
+Questions:
+- Is it worth making a distinction betwen 'modifier' and 'type'?
+    - could it be more generic? 'dimension1, dimension2, etc'
+    - What if we had 'TagDimension'? Capture it generically
+- Do these tag modifiers need to be more than 1 level deep?
+    - empirical study of the brick tags
+    - potential tags causing issues are stuff like:
+        - `Zone_Heating_Temperature_Dead_Band_Setpoint`
+        - `Zone_Cooling_Temperature_Dead_Band_Setpoint`
+        - `Water_System_Discharge_Water_Temperature_Setpoint`
+        - `Water_System_Deionised_Water_Conductivity_Sensor`
+        - `Water_System_Cooling_Tower_Fan_Speed_Setpoint`
+        - `VAV_Occupied_Heating_Min_Supply_Air_Flow_Setpoint`
+        - `Thermal_Energy_Storage_Supply_Water_Differential_Pressure_Dead_Band_Setpoint`
+        - `Thumbwheel_Temperature_High_Limit_Setpoint`
+        - `Supply_Water_Differential_Pressure_Proportional_Band_Setpoint`
+        - `Return_Discharge_Fan_Differential_Speed_Setpoint`
+        - `Occupied_Heating_Min_Supply_Air_Flow_Setpoint`
+        - `Medium_Temperature_Hot_Water_Supply_Temperature_Low_Reset_Setpoint`
+        - `Heating_Discharge_Air_Temperature_Proportional_Band_Setpoint`
+        - `HWS_Medium_Temperature_Hot_Water_Supply_Temperature_Low_Reset_Setpoint`
+        - `HWS_Heat_Exchanger_Discharge_Water_Temperature_Proportional_Band_Setpoint`
+        - `AHU_Discharge_Air_Static_Pressure_Increase_Decrease_Step_Setpoint`
+        - `AHU_Heating_Discharge_Air_Temperature_Proportional_Band_Setpoint`
+
+What is the hierarchy of specificity?
+1. equipment type
+2. media
+3. equipment media (hot chilled condenser etc)
+4. operational types (discharge return outside zone)
+
+Maybe we don't need to make a decision about this now; instead, just carry it through
+
+---
+
+#### Types
 
 
-- `Point`
-    - `Sensor`
-        - `CO2 Sensor`
-            - `Outside Air CO2 Sensor`
-                - `Differential Outside Air CO2 Sensor`
-                - `Level Outside Air CO2 Sensor`
-            - `Return Air CO2 Sensor`
 
-### Combining Tags with Subclasses
+#### Modifiers
 
-Classes generated by tags (via `media`, `types`) are in addition to any explicitly designated subclasses.
+#### Subclasses
+
+These are explicit names of subclasses; useful for special cases and rare points for which
+its not necessary or possible to fully describe the class using the other dimensions.
+
+Likely this is the most useful for equipment names e.g. `Variable Air Volume Box With Reheat`.
+
+#### Synonyms
+
+## Class-based view
 
 ```yaml
-Point:
+Equipment:
     subclasses:
-        Sensor:
-            types:
-                CO2:
-                    media: [Air]
-                    types: [Outside, Return]
+        HVAC:
+            subclasses:
+                Pump:
+                    - media: Water
+                      modifiers: [Chilled, Condenser, Hot]
+                Terminal Unit:
                     subclasses:
-                        CO2 Differential Sensor
+                        Fan Coil Unit:
+                            synonyms: [FCU]
+                        Variable Air Volume Box:
+                            synonyms: [VAV]
+                            usesEquipment: [Damper]
+                            subclasses:
+                                Variable Air Volume Box With Reheat:
+                                    synonyms: [RVAV]
+                                    usesEquipment: [Heating Coil]
 ```
-
-generates
-
-- `Point`
-    - `Sensor`
-        - `CO2 Sensor`
-            - `Outside Air CO2 Sensor`
-            - `Return Air CO2 Sensor`
-            - `Differential CO2 Sensor`
-
-
-### Synonyms
-
-Tags and classes can have synonyms.
-
-For classes, this can be explicit:
-
-```yaml
-Domestic Hot Water Supply Temperature Sensor:
-    synonyms: Domestic Hot Water Discharge Temperature Sensor
-```
-
-For tags, this can be done declaratively. The generated class names will be duplicated with all of the synonyms replaced.
-
-```yaml
-Zone Temperature Sensor:
-    types:
-        - Average
-        - Highest:
-            synonyms: [Warmest] # should be a list
-        - Lowest:
-            synonyms: [Coldest]
-```
-
-generates
-
-- `Zone Temperature Sensor`
-    - `Average Zone Temperature Sensor`
-    - `Highest Zone Temperature Sensor`
-    - `Warmest Zone Temperature Sensor` (equivalent to above)
-    - `Lowest Zone Temperature Sensor`
-    - `Coldest Zone Temperature Sensor` (equivalent to above)
-
-The equivalances will be captured in the generated ontology.
-
-#### Note: Overriding Tag Composition Rules
-
-Above, "Level Outside Air CO2 Sensor" makes slightly less sense than "Outside Air CO2 Level Sensor".
-Maybe we can use a template to allow overriding the normal tag composition rules
-
-```yaml
-Point:
-    subclasses:
-        Sensor:
-            types:
-                CO2:
-                    media: [Air]
-                    types: [Outside, Return]
-                    template: $types $media CO2 $subtypes Sensor
-                    subtypes: [Differential, Level]
-```
-

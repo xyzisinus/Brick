@@ -39,17 +39,16 @@ def emit_subclass(name, parentname):
     emit_class(name)
     emit_class(parentname)
     g.add((BRICK[name], RDFS.subClassOf, BRICK[parentname]))
-    pass
 
 def emit_synonym(name, synonym):
     name = fix_name(name)
     synonym = fix_name(synonym)
     if name == synonym:
         return
+    print 'SYNONYM',name,synonym
     emit_class(name)
     emit_class(synonym)
     g.add((BRICK[name], BF.equivalentTagSet, BRICK[synonym]))
-    pass
 
 ##########################################
 
@@ -102,6 +101,7 @@ def media_expand(d, superclass):
 
 def type_expand(d, tagclasses=None, superclass=None):
     types = list_keys(d)
+    print types
     subclasses = []
     type_to_subclasses = defaultdict(list)
     if tagclasses is not None:
@@ -122,9 +122,12 @@ def type_expand(d, tagclasses=None, superclass=None):
             subclasses.append(_newclass)
 
     for typeclass in types:
-        print 'typeclass',typeclass
+        print 'typeclass',typeclass, 'superclass', superclass
         #TODO: handle the subclassing here
-        subclasses.extend(expand(get_key(d, typeclass), tagclasses=type_to_subclasses[typeclass], supertag=typeclass))
+        print 'tagclasses', type_to_subclasses[typeclass], 'supertag',typeclass
+        for tt in type_to_subclasses[typeclass]:
+            subclasses.extend(expand(get_key(d, typeclass), supertag=typeclass, superclass=tt))
+        #subclasses.extend(expand(get_key(d, typeclass), tagclasses=type_to_subclasses[typeclass], supertag=typeclass, superclass=superclass))
 
     return subclasses
 
@@ -151,11 +154,12 @@ def expand(d, superclass=None, tagclasses=None, supertag=None):
     if d is None:
         return subclasses
     if 'subclasses' in d:
+        print 'asdfasfd',superclass
         subclasses.extend(subclass_expand(d['subclasses'], superclass))
     if 'media' in d:
         tagclasses.extend(media_expand(d['media'], superclass))
     if 'types' in d:
-        tagclasses.extend(type_expand(d['types'], tagclasses=tagclasses))
+        tagclasses.extend(type_expand(d['types'], tagclasses=tagclasses, superclass=superclass))
         tagclasses.extend(type_expand(d['types'], superclass=superclass))
     if 'synonyms' in d:
         tagclasses.extend(synonym_expand(d['synonyms'], supertag, tagclasses))

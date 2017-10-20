@@ -4,23 +4,24 @@ Point:
         Command:
         Meter:
         Sensor:
-            subclasses:
-                CO2 Sensor:
+            types:
+                - CO2:
                     media: [Air]
                     types: [Outside, Return]
                     subclasses:
                         CO2 Differential Sensor:
                         CO2 Level Sensor:
-                Damper Position Sensor:
+                - Damper Position:
                     types: [Bypass, Fume Hood Sash, Mixed Air, Outside Air]
-                Zone Temperature Sensor:
-                    types:
-                        - Average
-                        - Highest:
-                            synonyms: [Warmest]
-                        - Lowest:
-                            synonyms: [Coldest]
-                Temperature Sensor:
+                - Temperature:
+                    subclasses:
+                        Zone Temperature:
+                            types:
+                                - Average
+                                - Highest:
+                                    synonyms: [Warmest]
+                                - Lowest:
+                                    synonyms: [Coldest]
                     media:
                         - Air:
                             types:
@@ -47,16 +48,11 @@ Point:
                                         Chilled Water Supply Temperature Sensor:
                                         Chilled Water Discharge Temperature Sensor:
                                         Heat Exchanger Supply Water Temperature Sensor:
-                                            synonyms: Heat Exchanger Discharge Water Temperature Sensor
                                         Hot Water Supply Temperature Sensor:
-                                            synonyms: Hot Water Discharge Temperature Sensor
                                             subclasses:
                                                 Domestic Hot Water Supply Temperature Sensor:
-                                                    synonyms: Domestic Hot Water Discharge Temperature Sensor
                                                 High Temperature Hot Water Supply Temperature Sensor:
-                                                    synonyms: High Temperature Hot Water Discharge Temperature Sensor
                                                 Medium Temperature Hot Water Supply Temperature Sensor:
-                                                    synonyms: Medium Temperature Hot Water Discharge Temperature Sensor
                                 - Chilled:
                                     types: [Differential]
                                 - Entering:
@@ -76,17 +72,15 @@ Point:
                                                 Medium Temperature Hot Water Return Temperature Sensor:
                                         Chilled Water Return Temperature Sensor:
 
-                Cold Box Temperature Sensor:
-                Condensor Temperature Sensor:
-                CRAC Temperature Sensor:
-                Drive Temperature Sensor:
-                Differential Temperature Sensor:
-                Environment Box Temperature Sensor:
-                Freezer Temperature Sensor:
-                Hot Box Temperature Sensor:
-                Room Temperature Sensor:
-                Underfloor Temperature Sensor:
+                - Cold Box
+                - Condenser
+                - CRAC
+                - Drive
+                - Differential
+                - Box:
+                    types: [Environment, Hot, Cold]
+                - Freezer
+                - Room
+                - Underfloor
 
 
-        Setpoint:
-        Status:

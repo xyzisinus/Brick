@@ -1,0 +1,99 @@
+id: ciee
+location: true
+site: true
+
+---
+
+id: floor1
+site: ciee
+location: true
+floor: true
+type: floor
+
+---
+
+id: R207
+site: ciee
+location: true
+room: true
+isPartOf: [floor1, zone1]
+
+---
+
+id: R209
+site: ciee
+location: true
+room: true
+isPartOf: [floor1, zone1]
+
+---
+
+id: zone1
+site: ciee
+location: true
+type: HVAC zone
+hasPart: [R207, R209]
+
+---
+
+id: Roof
+site: ciee
+location: true
+type: floor
+
+---
+
+id: CIEE_RTU
+class: true
+equipment: true
+HVAC: true
+RTU: true
+heatsWith: gas
+multiZone: true
+
+---
+
+id: RTU1
+site: ciee
+type: CIEE_RTU
+feeds: zone1
+location: Roof
+
+---
+
+id: Venstar_thermostat
+class: true
+equipment: true
+HVAC: true
+thermostat: true
+singleStageHeat: true
+singleStageCool: true
+
+---
+
+id: temperature_sensor
+class: true
+sensor: true
+substance: air temperature
+unit: Celsius
+
+---
+
+id: tstat_1
+type: Venstar_thermostat
+controls: RTU1
+location: [R209, zone1]
+
+---
+
+id: Hamilton002c
+site: ciee
+type: temperature_sensor
+location: R207
+
+---
+
+id: Hamilton0055
+site: ciee
+type: temperature_sensor
+location: R209

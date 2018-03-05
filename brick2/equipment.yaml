@@ -1,0 +1,61 @@
+# defined types of equipment
+types:
+   - HVAC:
+        - AHU:
+            # cooling: [chilledWaterCool, dxCool]
+            delivery: [chilledBeamZone, directZone, multiZone, vavZone]
+            ductwork: 
+                - dualDuct: AHU discharges to two ducts using combination of hotDeck, coldDeck, or neutralDeck
+                - singleDuct: AHU discharges to a single duct
+                - tripleDuct: AHU discharges to three ducts: hotDeck, coldDeck, or neutralDeck
+            volume: [constantVolume, variableVolume]
+            relationships:
+                - coolsWith
+                - heatsWith
+                - heats
+                - cools
+        - Boiler:
+            relationships:
+                - produces
+        - Chiller:
+            mechanism: [absorption, absorption, reciprocal, screw]
+            relationships:
+                - coolsWith
+        - RTU:
+            delivery: [multiZone, vavZone]
+            relationships:
+                - coolsWith
+                - heatsWith
+                - heats
+                - cools
+        - VAV:
+            ductwork: [dual_duct, single_duct]
+            volume: [constantVolume, variableVolume]
+            fan: [fan_powered]
+            heat: [reheat]
+            cool: [cooling]
+            relationships:
+                - coolsWith
+                - heatsWith
+                - heats
+                - cools
+        - Thermostat:
+            heatStages: [singleStageHeat, twoStageHeat]
+            coolStages: [singleStageCool, twoStageCool]
+        - Tank:
+            subject: [gas, gasoline, oil, water]
+        - Damper:
+            function: [discharge, supply, return, exhaust]
+        - Fan:
+            frequency: [constant, variable]
+            function: [discharge, supply, return, exhaust]
+        - Pump:
+            function: [leaving, entering]
+            relationships:
+                - pumps
+        - Valve:
+            function: [leaving, entering]
+   - Lighting
+   - Electrical
+   - Power:
+        types: [apparent, real, active]

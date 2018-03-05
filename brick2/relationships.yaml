@@ -1,0 +1,67 @@
+coolsWith:
+    domain: [equipment]
+    range: [substance]
+    definition: the substance/material used for cooling
+
+heatsWith:
+    domain: [equipment]
+    range: [substance]
+    definition: the substance/material used for heating
+
+cools:
+    domain: [equipment]
+    range: [substance]
+    reverse: [isCooledBy]
+    definition: the substance/material that is cooled
+
+heats:
+    domain: [equipment]
+    range: [substance]
+    reverse: [isHeatedBy]
+    definition: the substance/material that is heated
+
+produces:
+    domain: [equipment]
+    range: [substance]
+    reverse: [isProducedBy]
+    definition: the substance/material that is produced as a byproduct of this equipment's operation
+
+pumps:
+    domain: [equipment]
+    range: [substance]
+    definition: the substance/material that this equipment pumps
+    TODO: maybe "operatesOn" as a relationship? is "pumps" too specific?
+
+poweredBy:
+    domain: [equipment]
+    range: [substance]
+    reverse: [powers]
+    definition: the substance/material used to power/fuel this equipment
+
+feeds:
+    domain: [equipment]
+    range: [equipment]
+    reverse: [isFedBy]
+    definition: the equipment that is "downstream" of this equipment. Indicates flows
+
+hasPoint:
+    domain: [equipment, location]
+    range: [point]
+    reverse: [isPointOf]
+    definition: an associated sensing/actuation point
+
+hasPart:
+    domain: [equipment, location]
+    range: [equipment, location]
+    reverse: [isPartOf]
+    definition: a piece of eqiupment that is physically part of this equipment; mechanical composition
+
+site:
+    domain: [equipment]
+    range: [site]
+    definition: the deployment site
+
+location:
+    domain: [point, equipment]
+    range: [location]
+    definition: point or equipment is located here

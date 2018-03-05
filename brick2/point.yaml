@@ -1,0 +1,14 @@
+# the kinds of points supported
+types:
+    - sensor
+    - alarm
+    - meter
+    - command
+    - setpoint
+
+relationships:
+    - substance
+    - equipment
+    - location
+    - unit
+    - site

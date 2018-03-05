@@ -1,0 +1,9 @@
+types:
+    - site
+    - building
+    - wing
+    - zone:
+        types: [HVAC, lighting, fire]
+    - floor
+    - room
+        types: [conference, kitchen, server, classroom]

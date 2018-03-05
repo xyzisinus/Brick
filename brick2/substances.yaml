@@ -1,0 +1,30 @@
+# These are the available substances supported by the type system
+Air:
+    quantity: [temperature, pressure, humidity, flow]
+    function: [mixed, exhaust, outside, return, supply, discharge, entering, leaving]
+
+Water:
+    quantity: [temperature, flow, pressure, differential pressure]
+    function: [entering, leaving, return, supply, discharge]
+    usage: [chilled, hot, condenser, blowdown, domestic, makeup, city, grey, black]
+
+CO2:
+    quantity: [level, differential]
+    function: [outside, return]
+
+Steam:
+    quantity: [temp, pressure, flow]
+
+Oil:
+    quantity: [level, temp]
+
+Gas:
+    quantity: [level, pressure]
+
+Gasoline:
+    quantity: [level]
+
+Electricity:
+    voltage: [3.3VDC, 12VDC, 24VDC, 24VAC, 120VAC, 240VAC]
+
+Luminance:

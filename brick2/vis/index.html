@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <style>
+
+    body {
+        font-size: 12px;
+    }
+
+    rect {
+      fill: none;
+      pointer-events: all;
+    }
+
+    .node {
+        /*fill: #ccc;
+        stroke: #f00;*/
+        /* stroke: #fff;
+        stroke-width: 2px;*/
+        border-color: #f00;
+        stroke-width: 8;
+    }
+
+    .link {
+      stroke: #999;
+    }
+
+    table {
+        border-spacing: 0 0;
+        border-collapse: separate;
+        fixed-layout: fixed;
+        width: 200px;
+    }
+
+    th, td {
+        padding: 0 10px;
+        width: 100px;
+        background-color: #eee;
+    }
+
+    table, th {
+        border: 1px solid grey;
+    }
+
+    td {
+        border: 1px dashed grey;
+    }
+
+    </style>
+    <body>
+        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script>
+        var columns = ["Tag","Value"];
+        var data = [
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "location", Value: "True"},
+                    {Tag: "site", Value: "True"},
+                    {Tag: "id", Value: "ciee"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "id", Value: "floor1"},
+                    {Tag: "type", Value: "floor"},
+                    {Tag: "location", Value: "True"},
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "floor", Value: "True"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "isPartOf", Value: ['floor1', 'zone1']},
+                    {Tag: "id", Value: "R207"},
+                    {Tag: "location", Value: "True"},
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "room", Value: "True"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "isPartOf", Value: ['floor1', 'zone1']},
+                    {Tag: "id", Value: "R209"},
+                    {Tag: "location", Value: "True"},
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "room", Value: "True"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "hasPart", Value: ['R207', 'R209']},
+                    {Tag: "type", Value: "HVAC zone"},
+                    {Tag: "location", Value: "True"},
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "id", Value: "zone1"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "type", Value: "floor"},
+                    {Tag: "location", Value: "True"},
+                    {Tag: "id", Value: "Roof"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "heatsWith", Value: "gas"},
+                    {Tag: "RTU", Value: "True"},
+                    {Tag: "multiZone", Value: "True"},
+                    {Tag: "HVAC", Value: "True"},
+                    {Tag: "equipment", Value: "True"},
+                    {Tag: "class", Value: "True"},
+                    {Tag: "id", Value: "CIEE_RTU"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "feeds", Value: "zone1"},
+                    {Tag: "type", Value: "CIEE_RTU"},
+                    {Tag: "location", Value: "Roof"},
+                    {Tag: "id", Value: "RTU1"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "equipment", Value: "True"},
+                    {Tag: "singleStageHeat", Value: "True"},
+                    {Tag: "thermostat", Value: "True"},
+                    {Tag: "HVAC", Value: "True"},
+                    {Tag: "singleStageCool", Value: "True"},
+                    {Tag: "class", Value: "True"},
+                    {Tag: "id", Value: "Venstar_thermostat"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "substance", Value: "air temperature"},
+                    {Tag: "sensor", Value: "True"},
+                    {Tag: "id", Value: "temperature_sensor"},
+                    {Tag: "unit", Value: "Celsius"},
+                    {Tag: "class", Value: "True"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "type", Value: "Venstar_thermostat"},
+                    {Tag: "id", Value: "tstat_1"},
+                    {Tag: "controls", Value: "RTU1"},
+                    {Tag: "location", Value: ['R209', 'zone1']},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "type", Value: "temperature_sensor"},
+                    {Tag: "location", Value: "R207"},
+                    {Tag: "id", Value: "Hamilton002c"},
+                ]
+            },
+            {
+                x:0, y:0,
+                table: [
+                    {Tag: "site", Value: "ciee"},
+                    {Tag: "type", Value: "temperature_sensor"},
+                    {Tag: "location", Value: "R209"},
+                    {Tag: "id", Value: "Hamilton0055"},
+                ]
+            },
+        ];
+
+        var width = window.innerWidth,
+            height = window.innerHeight;
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+            //.on("mousemove", mousemove)
+            //.on("mousedown", mousedown);
+
+        var links = [];
+        data.forEach(function(src) {
+            data.forEach(function(dst) {
+                src.table.forEach(function(srcDict, srcidx) {
+                    dst.table.forEach(function(dstDict, dstidx) {
+                        var srcTag = srcDict.Tag;
+                        var dstTag = dstDict.Tag;
+                        var srcVal = srcDict.Value;
+                        var dstVal = dstDict.Value;
+                        //console.log(typeof srcVal);
+                        if (dstTag == "id" && srcVal == dstVal) {
+                            links.push({source: src, target: dst, label: srcTag});
+                        } else if (typeof srcVal === "object") {
+                            //console.log(srcVal);
+                            for (var key in srcVal) {
+                                if (srcVal[key] == dstVal) {
+                                    links.push({source: src, target: dst, label: srcTag});
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        });
+
+		var force = d3.layout.force()
+			.size([width, height])
+			.nodes(data)
+            .links(links)
+            .gravity(0.1)
+            .chargeDistance(500)
+			.linkDistance(400)
+            .linkStrength(0.2)
+            .charge(-3000);
+        var node_drag = d3.behavior.drag()
+            .on("dragstart", dragstart)
+            .on("drag", dragmove)
+            .on("dragend", dragend);
+
+        // drag behavior from http://bl.ocks.org/norrs/2883411
+        function dragstart(d, i) {
+            force.stop() // stops the force auto positioning before you start dragging
+        }
+
+        function dragmove(d, i) {
+            d.px += d3.event.dx;
+            d.py += d3.event.dy;
+            d.x += d3.event.dx;
+            d.y += d3.event.dy; 
+            tick({"alpha":0}); // this is the key to make it work together with updating both px,py,x,y on d !
+        }
+
+        function dragend(d, i) {
+            d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+            tick({"alpha":0});
+            force.resume();
+        }
+
+        var link = svg.selectAll('.link')
+                      .data(links)
+                      .enter()
+                      .append("line")
+                      .attr("class","link");
+
+        var node = svg.selectAll('.node')
+                      .data(data).enter()
+                      .append("foreignObject")
+                      .attr("x", function(node) { return node.x; })
+                      .attr("y", function(node) { return node.y; })
+                      .attr("class", "node")
+                      .call(node_drag)
+                      .html(function(node) {
+                        var table = d3.select(document.createElement("g"));
+                        var rows = table.append('table').append('tbody').selectAll("tr")
+                                .data(node.table).enter().append("tr");
+
+                        rows.selectAll('td').data(function(row) {
+                            //console.log(row);
+                            return columns.map(function(column) {
+                                    return {column: column, value: row[column]};
+                            });
+                        }).enter().append('td')
+                          .text(function(d) {return d.value == "true" || d.value == "True" ? "" : d.value })
+                          .style("font-weight", function(d) { return d.column == "Tag" ? "bold" : ""; });
+
+                        console.log(table.node().getBoundingClientRect());
+                        return table.html();
+                      });
+        var edgelabels = svg.selectAll(".edgelabel")
+                        .data(links).enter()
+                        .append("text")
+                        .style("pointer-events", "none")
+                        .attr({"class": "edgelabel",
+                                "id": function(d, i) { return 'edgelabel'+i},
+                                'dx': 80,
+                                'dy': 0,
+                                'fill': '#aaa'});
+        edgelabels.append('textPath')
+                    .attr('xlink:href',function(d,i) {return '#edgepath'+i})
+                    .style('pointer-events','none')
+                    .text(function(d,i){return d.label; });
+        console.log(edgelabels);
+
+
+        node.on('mouseover', function(d) {
+            d3.select(this).selectAll('td').style('background-color', '#ff817b');
+
+            link.style('stroke-width', function(l) {
+                if (d === l.source || d === l.target)
+                    return 4;
+                else
+                    return 1;
+            });
+            //link.style('stroke', function(l) {
+            //    if (d === l.source || d === l.target)
+            //        return '#ff6961';
+            //    else
+            //        return '#777777';
+            //});
+        });
+        node.on('mouseout', function(d) {
+            d3.select(this).selectAll('td').style('background-color', '#eee');
+        });
+
+        //console.log(link);
+        var tick = function(a) {
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; }) // 36 is 1.5 lines
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+            node.attr('x', function(d) { return d.x; })
+                .attr('y', function(d) { return d.y; });
+
+            edgelabels.attr('rx', function(d) { return d.source.x })
+                      .attr('ry', function(d) { return d.source.y });
+            //edgelabels.attr('transform',function(d,i){
+            //        if (d.target.x<d.source.x){
+            //            bbox = this.getBBox();
+            //            rx = bbox.x+bbox.width/2;
+            //            ry = bbox.y+bbox.height/2;
+            //            return 'rotate(180 '+rx+' '+ry+')';
+            //        } else {
+            //            return 'rotate(0)';
+            //        }
+            //});
+        };
+
+        force.on('tick', tick);
+
+        force.start();
+
+        </script>
+    </body>
+</html>

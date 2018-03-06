@@ -151,12 +151,12 @@
                         var srcVal = srcDict.Value;
                         var dstVal = dstDict.Value;
                         //console.log(typeof srcVal);
-                        if (dstTag == "id" && srcVal == dstVal) {
+                        if (dstTag == "id" && srcVal == dstVal && srcTag != "id") {
                             links.push({source: src, target: dst, label: srcTag});
                         } else if (typeof srcVal === "object") {
                             //console.log(srcVal);
                             for (var key in srcVal) {
-                                if (srcVal[key] == dstVal) {
+                                if (srcVal[key] == dstVal && srcTag != "id" && dstTag == "id") {
                                     links.push({source: src, target: dst, label: srcTag});
                                     break;
                                 }

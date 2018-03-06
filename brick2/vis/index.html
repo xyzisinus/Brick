@@ -23,6 +23,7 @@
 
     .link {
       stroke: #999;
+      stroke-width: 1;
     }
 
     table {
@@ -203,8 +204,37 @@
                       .data(links)
                       .enter()
                       .append("line")
-                      .attr("class","link");
+                      .attr("class","link")
+                      .attr('marker-end','url(#arrowhead)');
 
+
+        var edgepaths = svg.selectAll(".edgepath")
+                        .data(links).enter()
+                        .append('path')
+                        .attr('class','edgepath')
+                        .attr('fill-opacity',0)
+                        .attr('stroke-opacity',0)
+                        .attr('id', function(d,i) { return 'edgepath'+i })
+                        .style('pointer-events','none');
+
+        var edgelabels = svg.selectAll(".edgelabel")
+                        .data(links).enter()
+                        .append("text")
+                        .style("pointer-events", "none")
+                        .attr("class", "edgelabel")
+                        .attr("id", function(d,i) { return 'edgelabel'+i; })
+                        .attr('font-size', 20)
+                        .attr("fill", "#000");
+                                //'x': function(d) { if (d.target.x > d.source.x) { return d.source.x + (d.source.x + d.target.x)/2 } else { return d.target.x + (d.target.x-d.source.x)/2} },
+                                //'y': function(d) { if (d.target.y > d.source.y) { return d.source.y + (d.source.y + d.target.y)/2 } else { return d.target.y + (d.target.y-d.source.y)/2} },
+        edgelabels.append('textPath')
+                    .attr('xlink:href',function(d,i) {return '#edgepath'+i})
+                    .style('text-anchor','middle')
+                    .style('pointer-events','none')
+                    .attr('startOffset','50%')
+                    .text(function(d,i){return d.label; });
+
+        console.log(edgelabels);
         var node = svg.selectAll('.node')
                       .data(data).enter()
                       .append("foreignObject")
@@ -225,45 +255,62 @@
                         }).enter().append('td')
                           .text(function(d) {return d.value == "true" || d.value == "True" ? "" : d.value })
                           .style("font-weight", function(d) { return d.column == "Tag" ? "bold" : ""; });
-                        table.style('background-color','#fff');
+                        //table.style('background-color','#fff');
                         return table.html();
                       });
-        var edgelabels = svg.selectAll(".edgelabel")
-                        .data(links).enter()
-                        .append("text")
-                        .style("pointer-events", "none")
-                        .style("font-color", "black")
-                        .attr({"class": "edgelabel",
-                                "id": function(d, i) { return 'edgelabel'+i},
-                                'dx': 80,
-                                'dy': 0,
-                                'font-size': 10,
-                                'fill': '#aaa'});
-        edgelabels.append('textPath')
-                    .attr('xlink:href',function(d,i) {return '#edgepath'+i})
-                    .style('pointer-events','none')
-                    .text(function(d,i){return d.label; });
-        console.log(edgelabels);
+        svg.append('defs').append('marker')
+            .attr('id','arrowhead')
+            .attr('viewBox','-0 -5 10 10')
+            .attr('refX',13)
+            .attr('refY',0)
+            .attr('orient','auto')
+            .attr('markerWidth',13)
+            .attr('markerHeight',13)
+            .attr('xoverflow','visible')
+            .append('svg:path')
+            .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+            .attr('fill', '#999')
+            .style('stroke','none');
+
+        svg.append('defs').append('marker')
+            .attr('id','arrowheadhighlight')
+            .attr('viewBox','-0 -5 10 10')
+            .attr('refX',13)
+            .attr('refY',0)
+            .attr('orient','auto')
+            .attr('markerWidth',13)
+            .attr('markerHeight',13)
+            .attr('xoverflow','visible')
+            .append('svg:path')
+            .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+            .attr('fill', '#ff817b')
+            .style('stroke','none');
 
 
         node.on('mouseover', function(d) {
             d3.select(this).selectAll('td').style('background-color', '#ff817b');
 
-            link.style('stroke-width', function(l) {
+            link.style('stroke', function(l) {
                 if (d === l.source || d === l.target)
-                    return 4;
+                    return '#ff817b';
                 else
-                    return 1;
+                    return '#000';
             });
-            //link.style('stroke', function(l) {
-            //    if (d === l.source || d === l.target)
-            //        return '#ff6961';
-            //    else
-            //        return '#777777';
-            //});
+            link.attr('marker-end', function(l) {
+                if (d === l.source || d === l.target)
+                    return 'url(#arrowheadhighlight)';
+                else
+                    return 'url(#arrowhead)';
+            });
         });
         node.on('mouseout', function(d) {
             d3.select(this).selectAll('td').style('background-color', '#eee');
+            link.style('stroke', function(l) {
+                    return '#000';
+            });
+            link.attr('marker-end', function(l) {
+                    return 'url(#arrowhead)';
+            });
         });
 
         //console.log(link);
@@ -274,13 +321,15 @@
                 .attr("y2", function(d) { return d.target.y; });
             node.attr('x', function(d) { return d.x; })
                 .attr('y', function(d) { return d.y; });
+            edgepaths.attr('d', function (d) {
+                return 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+            });
 
-            edgelabels.attr('x', function(d) { return d.source.x })
-                      .attr('y', function(d) { return d.source.y });
+            //edgelabels.attr('x', function(d) { return d.source.x })
+            //          .attr('y', function(d) { return d.source.y });
             edgelabels.attr('transform',function(d,i){
                     if (d.target.x<d.source.x){
                         bbox = this.getBBox();
-                        //console.log(bbox);
                         rx = bbox.x+bbox.width/2;
                         ry = bbox.y+bbox.height/2;
                         return 'rotate(180 '+rx+' '+ry+')';

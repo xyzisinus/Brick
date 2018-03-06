@@ -1,0 +1,62 @@
+id: hvacloop
+location: true
+site: true
+
+---
+
+id: siteAHU
+class: true
+equipment: true
+HVAC: true
+AHU: true
+vavZone: true
+singleDuct: true
+variableVolume: true
+coolsWith: chilled water
+heatsWith: hot water
+
+---
+
+id: siteVAV
+class: true
+equipment: true
+HVAC: true
+VAV: true
+singleDuct: true
+variableVolume: true
+fan_powered: true
+reheat: true
+cooling: true
+coolsWith: chilled water
+heatsWith: hot water
+
+---
+
+id: AHU1A
+site: hvacloop
+type: siteAHU
+feeds: [VAV410]
+
+---
+
+id: VAV410
+site: hvacloop
+type: siteVAV
+isFedBy: AHU1A
+feeds: zone410
+
+---
+
+id: zone410
+site: hvacloop
+location: true
+type: HVAC zone
+hasPart: [R410]
+
+---
+
+id: R410
+site: hvacloop
+location: true
+room: true
+isPartOf: zone410

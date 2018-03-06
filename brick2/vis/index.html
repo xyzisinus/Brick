@@ -52,134 +52,83 @@
         <script>
         var columns = ["Tag","Value"];
         var data = [
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "location", Value: "True"},
-                    {Tag: "site", Value: "True"},
-                    {Tag: "id", Value: "ciee"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "id", Value: "floor1"},
-                    {Tag: "type", Value: "floor"},
-                    {Tag: "location", Value: "True"},
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "floor", Value: "True"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "isPartOf", Value: ['floor1', 'zone1']},
-                    {Tag: "id", Value: "R207"},
-                    {Tag: "location", Value: "True"},
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "room", Value: "True"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "isPartOf", Value: ['floor1', 'zone1']},
-                    {Tag: "id", Value: "R209"},
-                    {Tag: "location", Value: "True"},
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "room", Value: "True"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "hasPart", Value: ['R207', 'R209']},
-                    {Tag: "type", Value: "HVAC zone"},
-                    {Tag: "location", Value: "True"},
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "id", Value: "zone1"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "type", Value: "floor"},
-                    {Tag: "location", Value: "True"},
-                    {Tag: "id", Value: "Roof"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "heatsWith", Value: "gas"},
-                    {Tag: "RTU", Value: "True"},
-                    {Tag: "multiZone", Value: "True"},
-                    {Tag: "HVAC", Value: "True"},
-                    {Tag: "equipment", Value: "True"},
-                    {Tag: "class", Value: "True"},
-                    {Tag: "id", Value: "CIEE_RTU"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "feeds", Value: "zone1"},
-                    {Tag: "type", Value: "CIEE_RTU"},
-                    {Tag: "location", Value: "Roof"},
-                    {Tag: "id", Value: "RTU1"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "equipment", Value: "True"},
-                    {Tag: "singleStageHeat", Value: "True"},
-                    {Tag: "thermostat", Value: "True"},
-                    {Tag: "HVAC", Value: "True"},
-                    {Tag: "singleStageCool", Value: "True"},
-                    {Tag: "class", Value: "True"},
-                    {Tag: "id", Value: "Venstar_thermostat"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "substance", Value: "air temperature"},
-                    {Tag: "sensor", Value: "True"},
-                    {Tag: "id", Value: "temperature_sensor"},
-                    {Tag: "unit", Value: "Celsius"},
-                    {Tag: "class", Value: "True"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "type", Value: "Venstar_thermostat"},
-                    {Tag: "id", Value: "tstat_1"},
-                    {Tag: "controls", Value: "RTU1"},
-                    {Tag: "location", Value: ['R209', 'zone1']},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "type", Value: "temperature_sensor"},
-                    {Tag: "location", Value: "R207"},
-                    {Tag: "id", Value: "Hamilton002c"},
-                ]
-            },
-            {
-                x:0, y:0,
-                table: [
-                    {Tag: "site", Value: "ciee"},
-                    {Tag: "type", Value: "temperature_sensor"},
-                    {Tag: "location", Value: "R209"},
-                    {Tag: "id", Value: "Hamilton0055"},
-                ]
-            },
+{
+	x:0, y:0,
+	table: [
+		{Tag: "location", Value: "True"},
+		{Tag: "site", Value: "True"},
+		{Tag: "id", Value: "hvacloop"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "vavZone", Value: "True"},
+		{Tag: "HVAC", Value: "True"},
+		{Tag: "variableVolume", Value: "True"},
+		{Tag: "singleDuct", Value: "True"},
+		{Tag: "coolsWith", Value: "chilled water"},
+		{Tag: "heatsWith", Value: "hot water"},
+		{Tag: "equipment", Value: "True"},
+		{Tag: "AHU", Value: "True"},
+		{Tag: "id", Value: "siteAHU"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "singleDuct", Value: "True"},
+		{Tag: "HVAC", Value: "True"},
+		{Tag: "equipment", Value: "True"},
+		{Tag: "variableVolume", Value: "True"},
+		{Tag: "coolsWith", Value: "chilled water"},
+		{Tag: "heatsWith", Value: "hot water"},
+		{Tag: "fan_powered", Value: "True"},
+		{Tag: "cooling", Value: "True"},
+		{Tag: "reheat", Value: "True"},
+		{Tag: "VAV", Value: "True"},
+		{Tag: "id", Value: "siteVAV"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "feeds", Value: ['VAV410']},
+		{Tag: "type", Value: "siteAHU"},
+		{Tag: "id", Value: "AHU1A"},
+		{Tag: "site", Value: "hvacloop"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "site", Value: "hvacloop"},
+		{Tag: "feeds", Value: "zone410"},
+		{Tag: "type", Value: "siteVAV"},
+		{Tag: "isFedBy", Value: "AHU1A"},
+		{Tag: "id", Value: "VAV410"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "hasPart", Value: ['R410']},
+		{Tag: "type", Value: "HVAC zone"},
+		{Tag: "location", Value: "True"},
+		{Tag: "site", Value: "hvacloop"},
+		{Tag: "id", Value: "zone410"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "isPartOf", Value: "zone410"},
+		{Tag: "id", Value: "R410"},
+		{Tag: "location", Value: "True"},
+		{Tag: "site", Value: "hvacloop"},
+		{Tag: "room", Value: "True"},
+	]
+},
         ];
 
         var width = window.innerWidth,
@@ -276,18 +225,19 @@
                         }).enter().append('td')
                           .text(function(d) {return d.value == "true" || d.value == "True" ? "" : d.value })
                           .style("font-weight", function(d) { return d.column == "Tag" ? "bold" : ""; });
-
-                        console.log(table.node().getBoundingClientRect());
+                        table.style('background-color','#fff');
                         return table.html();
                       });
         var edgelabels = svg.selectAll(".edgelabel")
                         .data(links).enter()
                         .append("text")
                         .style("pointer-events", "none")
+                        .style("font-color", "black")
                         .attr({"class": "edgelabel",
                                 "id": function(d, i) { return 'edgelabel'+i},
                                 'dx': 80,
                                 'dy': 0,
+                                'font-size': 10,
                                 'fill': '#aaa'});
         edgelabels.append('textPath')
                     .attr('xlink:href',function(d,i) {return '#edgepath'+i})
@@ -325,18 +275,19 @@
             node.attr('x', function(d) { return d.x; })
                 .attr('y', function(d) { return d.y; });
 
-            edgelabels.attr('rx', function(d) { return d.source.x })
-                      .attr('ry', function(d) { return d.source.y });
-            //edgelabels.attr('transform',function(d,i){
-            //        if (d.target.x<d.source.x){
-            //            bbox = this.getBBox();
-            //            rx = bbox.x+bbox.width/2;
-            //            ry = bbox.y+bbox.height/2;
-            //            return 'rotate(180 '+rx+' '+ry+')';
-            //        } else {
-            //            return 'rotate(0)';
-            //        }
-            //});
+            edgelabels.attr('x', function(d) { return d.source.x })
+                      .attr('y', function(d) { return d.source.y });
+            edgelabels.attr('transform',function(d,i){
+                    if (d.target.x<d.source.x){
+                        bbox = this.getBBox();
+                        //console.log(bbox);
+                        rx = bbox.x+bbox.width/2;
+                        ry = bbox.y+bbox.height/2;
+                        return 'rotate(180 '+rx+' '+ry+')';
+                    } else {
+                        return 'rotate(0)';
+                    }
+            });
         };
 
         force.on('tick', tick);

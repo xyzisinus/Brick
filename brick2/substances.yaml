@@ -1,6 +1,6 @@
 # These are the available substances supported by the type system
 Air:
-    quantity: [temperature, pressure, humidity, flow]
+    quantity: [temperature, static pressure, differential pressure, humidity, flow]
     function: [mixed, exhaust, outside, return, supply, discharge, entering, leaving]
 
 Water:
@@ -28,3 +28,7 @@ Electricity:
     voltage: [3.3VDC, 12VDC, 24VDC, 24VAC, 120VAC, 240VAC]
 
 Luminance:
+Occupancy:
+Speed:
+Position:
+    type: [on/off, on, off, start/stop, start, stop, percentage]

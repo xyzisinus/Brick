@@ -2,7 +2,6 @@
 types:
    - HVAC:
         - AHU:
-            # cooling: [chilledWaterCool, dxCool]
             delivery: [chilledBeamZone, directZone, multiZone, vavZone]
             ductwork: 
                 - dualDuct: AHU discharges to two ducts using combination of hotDeck, coldDeck, or neutralDeck
@@ -54,7 +53,7 @@ types:
             relationships:
                 - pumps
         - Valve:
-            function: [leaving, entering]
+            function: [leaving, entering, heating, cooling]
    - Lighting
    - Electrical
    - Power:

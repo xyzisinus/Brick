@@ -1,0 +1,84 @@
+Multiple zone VAV Air Handling Unit:
+- supply fan start
+- supply fan stop
+- supply fan high static pressure alarm
+- supply fan speed command
+- supply fan speed status
+- supply air temperature
+- duct static pressure sensor
+- differential pressure on filter
+- heating coil supply air temperature
+- economizer outdoor air damper position command
+- return air damper position command
+- outdoor air temperature sensor
+- mixed air temperature sensor
+- return air temperature sensor
+- chilled water system valve
+- hot water valve
+- electric heating coil on %
+- outdoor air flow sensor
+- minimum outdoor air damper open/close (?)
+- minimum outdoor air damper differential pressure (?)
+- minimum outdoor air damper (?)
+- minimum outdoor air flow sensor (?)
+- relief damper open/close command
+- building static pressure sensor
+- relief fan start/stop command
+- relief fan speed status
+- relief fan speed command
+- relief damper open/close position command
+- building static pressure sensor
+- return fan start/stop command
+- return fan speed status
+- return fan high static alarm reset
+- return fan speed
+- supply air flow sensor
+- return air flow sensor
+- return fan discharge static pressure
+- exhaust damper position command
+- building static pressure
+
+Dual Fan Dual Duct Heating VAV AHU:
+- supply fan start/stop command
+- supply fan high static alarm reset
+- supply fan speed command
+- supply fan speed status
+- supply air temperature sensor
+- hot water valve position command
+- electric heating coil command
+- duct static pressure sensor
+- differential pressure on filter
+- return air temperature sensor
+
+Single Zone VAV Air handling Unit:
+- supply fan start
+- supply fan stop
+- supply fan high static pressure alarm
+- supply fan speed command
+- supply fan speed status
+- supply air temperature
+- outdoor air damper position command
+- return air damper position command
+- outdoor air temperature sensor
+- mixed air temperature sensor
+- return air temperature sensor
+- chilled water system valve command
+- compressor signal command
+- hot water valve command
+- electric heating coil position command
+- zone air temperature sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor
+- relief damper position command
+- relief damper open/close command
+- relief fan speed status
+- relief fan speed command
+- relief fan start/stop command
+- building static pressure sensor
+- return fan start/stop command
+- return fan speed status
+- return fan speed command
+- exhaust air damper position command

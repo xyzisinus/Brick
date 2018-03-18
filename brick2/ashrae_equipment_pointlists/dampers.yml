@@ -1,0 +1,14 @@
+Types:
+- return damper
+- outside damper
+- relief damper
+- exhaust damper
+
+Points:
+- commands:
+    - position
+    - open/close
+    - open
+    - close
+- status:
+    - differential pressure

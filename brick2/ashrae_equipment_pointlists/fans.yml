@@ -1,0 +1,18 @@
+Types:
+- terminal unit fan
+- supply fan
+- relief fan
+- return fan
+
+Points:
+- commands:
+    - speed
+    - start
+    - stop
+    - start/stop
+    - high static pressure alarm reset
+- status:
+    - speed
+- alarm:
+    - high static pressure
+    - discharge static pressure sensor

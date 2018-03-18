@@ -1,0 +1,124 @@
+Types:
+sensor:
+    - substance: air temperature
+      function: supply
+
+    - substance: air pressure
+      function: static
+      TODO: duct?
+
+    - substance: air pressure
+      function: static
+      usage: discharge
+      TODO: return fan?
+
+    - substance: air differential pressure
+      TODO: filter?
+
+    - substance: air temperature
+      function: supply
+      usage: heating coil
+
+    - substance: air temperature
+      TODO: zone? room?
+
+    - substance: air temperature
+      function: outdoor
+
+    - substance: air temperature
+      function: mixed
+
+    - substance: air temperature
+      function: return
+
+    - substance: air temperature
+      usage: discharge
+
+    - substance: air flow
+      function: outdoor
+
+    - substance: air flow
+      function: heating
+
+    - substance: air flow
+      function: cooling
+
+    - substance: air flow
+      usage: discharge
+
+    - substance: air flow
+      function: supply
+
+    - substance: air flow
+      function: return
+
+    - substance: air flow
+      function: outdoor
+      usage: minimum damper
+
+    - substance: air pressure
+      function: static
+      usage: building
+
+    - substance: occupancy
+
+    - substance: CO2
+      quantity: level
+
+command:
+    - window switch
+    - cooling command:
+        - compressor (signal command)
+    - valve:
+        - chilled water
+        - hot water
+    - heating command:
+        - electric heating coil
+    - valve:
+        - chilled water
+        - hot water
+    - damper position:
+        - cooling
+        - heating
+        - return air
+        - vav box
+        - relief
+        - exhaust
+        - economizer
+        - minimum outdoor air
+        - outdoor air
+
+    - fan speed command:
+        - supply
+        - relief
+        - return
+
+    - fan start command:
+        - supply
+        - relief
+        - return
+
+    - fan stop command:
+        - supply
+        - relief
+        - return
+
+    - fan start/stop command:
+        - supply
+        - relief
+        - return
+
+    - reset:
+        - high static pressure alarm
+        - supply fan high static pressure alarm
+
+alarm:
+    - high static pressure
+    - supply fan high static pressure
+
+setpoint:
+    - zone temperature setpoint
+    - zone thermostat override switch
+
+status:
+    - (supply) fan speed status

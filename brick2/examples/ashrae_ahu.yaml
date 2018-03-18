@@ -1,0 +1,128 @@
+id: ashrae_ahu
+type: [location, site]
+
+---
+
+id: ahu_class
+type: [class, equipment, HVAC, AHU, dualDuct, dualFan]
+heatsWith: [hot, water]
+
+---
+
+id: ahu1
+site: ashrae_ahu
+type: [equipment, HVAC, AHU, dualDuct, dualFan]
+hasPart: [supplyfan1, supplyfan2]
+
+---
+
+id: supplyfan1
+site: ashrae_ahu
+type: [equipment, HVAC, fan variable supply]
+hasPoint: [startstop1, alarmreset1, speedcmd1, speedstatus1]
+isPartOf: ahu1
+
+---
+
+id: startstop1
+site: ashrae_ahu
+type: [point, command]
+equipment: [supply, fan]
+substance: start/stop
+isPointOf: supplyfan1
+
+---
+
+id: alarmreset1
+site: ashrae_ahu
+type: [point, command]
+equipment: [supply, fan]
+substance: [static, air, pressure, alarm, reset]
+isPointOf: supplyfan1
+
+---
+
+id: speedcmd1
+site: ashrae_ahu
+type: [point, command]
+equipment: [supply, fan]
+substance: speed
+isPointOf: supplyfan1
+
+---
+
+id: speedstatus1
+site: ashrae_ahu
+type: [point, status]
+equipment: [supply, fan]
+substance: speed
+isPointOf: supplyfan1
+
+---
+
+id: sat1
+site: ashrae_ahu
+type: [point, sensor]
+equipment: [supply, fan]
+substance: [supply, air, temperature]
+isPointOf: ahu1
+
+---
+
+id: hw_vlv1
+site: ashrae_ahu
+type: [equipment, HVAC, heating, valve]
+isPartOf: ahu1
+
+---
+
+id: hw_vlv_cmd1
+site: ashrae_ahu
+type: [point, sensor]
+substance: [hot, water, valve, open%]
+equipment: [hot, water, valve]
+isPointOf: hw_vlv1
+
+---
+id: hw_vlv_cmd2
+site: ashrae_ahu
+type: [point, sensor]
+substance: [hot, water, valve, open%]
+equipment: [hot, water, valve]
+isPointOf: ahu1
+
+---
+
+id: ductpressure1
+site: ashrae_ahu
+type: [point, sensor]
+equipment: AHU
+substance: [static, air, pressure]
+isPointOf: ahu1
+
+---
+
+id: filterpressure1
+site: ashrae_ahu
+type: [point, sensor]
+equipment: AHU
+substance: [differential, air, pressure]
+isPointOf: ahu1
+
+---
+
+id: rat1
+site: ashrae_ahu
+type: [point, sensor]
+equipment: AHU
+substance: [return, air, temperature]
+isPointOf: ahu1
+
+---
+
+id: supplyfan2
+site: ashrae_ahu
+equipment: AHU
+type: [equipment, HVAC, variable supply fan]
+hasPoint: [startstop2, alarmreset2, speedcmd2, speedstatus2]
+isPartOf: ahu1

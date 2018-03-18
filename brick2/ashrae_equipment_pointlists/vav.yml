@@ -1,0 +1,72 @@
+VAV With Cool:
+- VAV Box Damper Position
+- Discharge Air flow sensor
+- zone/room temperature sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor
+
+VAV With Reheat:
+- discharge air temperature sensor
+- Heating Command (electric heating coil)
+- VAV Box Damper Position
+- Discharge Air flow sensor
+- zone/room temperature sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor
+
+Fan Powered Terminal Unit:
+- fan speed command
+- fan start command
+- fan stop command
+- fan speed status
+- discharge air temperature sensor
+- Heating Command (electric heating coil)
+- VAV Box Damper Position
+- primary Air flow sensor (discharge?)
+- zone/room temperature sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor
+
+Dual Duct Terminal Unit with Inlet Sensor:
+- Cooling Damper Position
+- Heating Damper Position
+- Cooling Air Flow Sensor
+- Heating Air Flow Sensor
+- Zone Air Temperature Sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor
+
+Dual Duct Terminal Unit with Inlet Sensor:
+- Cooling Damper Position
+- Heating Damper Position
+- Cooling Air Flow Sensor
+- Heating Air Flow Sensor
+- Zone Air Temperature Sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor
+
+Dual Duct Terminal Unit with Discharge Sensor:
+- Cooling Damper Position
+- Heating Damper Position
+- Discharge Air Flow Sensor
+- Zone Air Temperature Sensor
+- zone thermostat override switch
+- occupancy sensor
+- window switch
+- zone temperature setpoint
+- zone/room co2 sensor

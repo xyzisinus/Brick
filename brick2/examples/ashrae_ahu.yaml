@@ -4,21 +4,25 @@ type: [location, site]
 ---
 
 id: ahu_class
-type: [class, equipment, HVAC, AHU, dualDuct, dualFan]
+type: [class, equipment, HVAC, AHU]
+ductwork: [dualDuct] 
+fans: [dualFan]
 heatsWith: [hot, water]
 
 ---
 
 id: ahu1
 site: ashrae_ahu
-type: [equipment, HVAC, AHU, dualDuct, dualFan]
+type: [ahu_class]
 hasPart: [supplyfan1, supplyfan2]
 
 ---
 
 id: supplyfan1
 site: ashrae_ahu
-type: [equipment, HVAC, fan variable supply]
+type: [equipment, HVAC, fan]
+frequency: [variable]
+function: [supply]
 hasPoint: [startstop1, alarmreset1, speedcmd1, speedstatus1]
 isPartOf: ahu1
 
@@ -71,7 +75,8 @@ isPointOf: ahu1
 
 id: hw_vlv1
 site: ashrae_ahu
-type: [equipment, HVAC, heating, valve]
+type: [equipment, HVAC, valve]
+function: heating
 isPartOf: ahu1
 
 ---
@@ -123,6 +128,8 @@ isPointOf: ahu1
 id: supplyfan2
 site: ashrae_ahu
 equipment: AHU
-type: [equipment, HVAC, variable supply fan]
+type: [equipment, HVAC, fan]
+frequency: [variable]
+function: [supply]
 hasPoint: [startstop2, alarmreset2, speedcmd2, speedstatus2]
 isPartOf: ahu1

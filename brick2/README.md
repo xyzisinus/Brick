@@ -17,7 +17,9 @@
 - has `class` tag:
     ```yaml
     id: ahu_class
-    type: [class, equipment, HVAC, AHU, dualDuct, dualFan]
+    type: [equipment, HVAC, AHU]
+    ductwork: [dualDuct]
+    fans: [dualFan]
     heatsWith: [hot, water]
     coolsWith: [condensed, water]
     heats: [air]
@@ -35,7 +37,9 @@
 
     ```yaml
     id: AHU1A
-    type: [equipment, HVAC, AHU, dualDuct, dualFan]
+    type: [equipment, HVAC, AHU]
+    ductwork: [dualDuct]
+    fans: [dualFan]
     heatsWith: [hot, water]
     coolsWith: [condensed, water]
     heats: [air]

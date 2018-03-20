@@ -1,0 +1,191 @@
+id: gw_rtu
+type: [location, site]
+
+---
+
+id: rtu
+site: gw_rtu
+type: [equipment, HVAC, RTU]
+delivery: singleZone
+heatsWith: electricity
+hasPart: [mad, sf, clg-coil, htg-coil]
+feeds: zone
+
+---
+
+id: mad
+site: gw_rtu
+type: [equipment, HVAC, damper]
+function: mixed
+substance: air
+
+---
+
+id: sf
+site: gw_rtu
+type: [equipment, HVAC, fan]
+frequency: variable
+function: supply
+
+---
+
+id: clg-coil
+site: gw_rtu
+type: [equipment, HVAC, coil]
+function: cooling
+
+---
+
+id: htg-coil
+site: gw_rtu
+type: [equipment, HVAC, coil]
+function: heating
+
+---
+
+id: zone
+site: gw_rtu
+type: [location, HVAC, zone]
+hasPart: room101
+
+---
+
+id: room101
+site: gw_rtu
+type: [location, room]
+
+---
+
+id: 062-RTU02.NetOcc
+site: gw_rtu
+type: [point, status]
+substance: occupancy
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.Mode
+site: gw_rtu
+type: [point, status]
+substance: [mode, HVAC]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.ClgOcc-Sp
+site: gw_rtu
+type: [point, setpoint]
+substance: [occupied, air, cooling]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.ClgUnocc-Sp
+site: gw_rtu
+type: [point, setpoint]
+substance: [unoccupied, air, cooling]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.OprOAH
+site: gw_rtu
+type: [point, sensor]
+substance: [outside, air, humidity]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.OprOAT
+site: gw_rtu
+type: [point, sensor]
+substance: [outside, air, temperature]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.RA-Enth
+site: gw_rtu
+type: [point, sensor]
+substance: [return, air, enthalpy]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.RAH
+site: gw_rtu
+type: [point, sensor]
+substance: [return, air, humidity]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.RAT
+site: gw_rtu
+type: [point, sensor]
+substance: [return, air, temperature]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.SAT
+site: gw_rtu
+type: [point, sensor]
+substance: [supply, air, temperature]
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.Fan-S
+site: gw_rtu
+type: [point, status]
+equipment: [supply, fan]
+substance: start/stop
+isPointOf: rtu
+
+---
+
+id: 062-RTU02.Fan-Cmd
+site: gw_rtu
+type: [point, command]
+equipment: [supply, fan]
+substance: start/stop
+isPointOf: rtu
+
+# points
+# all for VFD:
+# - overload status (bool)
+# - drive at speed sp command (bool)
+# - forward rotation command (bool)
+# - reverse rotation command (bool)
+# - output power meter
+# - input power meter
+# - load meter
+# - running speed (speed status)
+# - frequency setting value (speed command)
+# - torque command
+# - on/off status
+#
+#
+# - output voltage
+# - output current
+# - output frequency speed
+# - cumulative saving power
+# - motor output
+# - torque current command
+# - motor load factor
+# - actual operation time
+# - min frequency
+# - max frequency
+# - torque boost
+# - cumulative power 2
+# - inverter thermal load factor
+# - motor thermal load factor
+#
+# Not sure:
+# regenerative break duty
+
+# Notes
+# mixed air damper -> cooling coil -> heating coil -> supplyfan (has VFD) -> zone
+# zone return air damper -> RTU (part of)
+# zone has temperature sensor, 2 humidity sensors

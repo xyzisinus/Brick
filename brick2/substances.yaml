@@ -13,10 +13,10 @@ CO2:
     function: [outside, return]
 
 Steam:
-    quantity: [temp, pressure, flow]
+    quantity: [temperature, pressure, flow]
 
 Oil:
-    quantity: [level, temp]
+    quantity: [level, temperature]
 
 Gas:
     quantity: [level, pressure]

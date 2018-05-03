@@ -6,6 +6,7 @@ print "var data = ["
 for doc in docs:
     print "{\n\tx:0, y:0,\n\ttable: ["
     for k,v in doc.items():
+        if k == 'site': continue
         if isinstance(v,list):
             print '\t\t{Tag: "%s", Value: %s},' % (k,v)
         else:

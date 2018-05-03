@@ -3,60 +3,67 @@ var data = [
 	x:0, y:0,
 	table: [
 		{Tag: "type", Value: ['location', 'site']},
-		{Tag: "id", Value: "small"},
+		{Tag: "id", Value: "gw_rtu"},
 	]
 },
 {
 	x:0, y:0,
 	table: [
-		{Tag: "heatsWith", Value: ['hot', 'water']},
-		{Tag: "fans", Value: ['dualFan']},
-		{Tag: "ductwork", Value: ['dualDuct']},
-		{Tag: "type", Value: ['class', 'equipment', 'HVAC', 'AHU']},
-		{Tag: "id", Value: "ahu_class"},
+		{Tag: "heatsWith", Value: "electricity"},
+		{Tag: "delivery", Value: "singleZone"},
+		{Tag: "hasPart", Value: ['mad', 'sf', 'clg-coil', 'htg-coil']},
+		{Tag: "feeds", Value: "zone"},
+		{Tag: "type", Value: ['equipment', 'HVAC', 'RTU']},
+		{Tag: "id", Value: "rtu"},
 	]
 },
 {
 	x:0, y:0,
 	table: [
-		{Tag: "hasPart", Value: ['supplyfan1']},
-		{Tag: "type", Value: ['ahu_class']},
-		{Tag: "id", Value: "ahu1"},
-		{Tag: "site", Value: "small"},
+		{Tag: "function", Value: "mixed"},
+		{Tag: "substance", Value: "air"},
+		{Tag: "type", Value: ['equipment', 'HVAC', 'damper']},
+		{Tag: "id", Value: "mad"},
 	]
 },
 {
 	x:0, y:0,
 	table: [
-		{Tag: "function", Value: ['supply']},
-		{Tag: "hasPoint", Value: ['speedcmd1', 'speedstatus1']},
-		{Tag: "frequency", Value: ['variable']},
-		{Tag: "isPartOf", Value: "ahu1"},
+		{Tag: "function", Value: "supply"},
+		{Tag: "frequency", Value: "variable"},
 		{Tag: "type", Value: ['equipment', 'HVAC', 'fan']},
-		{Tag: "site", Value: "small"},
-		{Tag: "id", Value: "supplyfan1"},
+		{Tag: "id", Value: "sf"},
 	]
 },
 {
 	x:0, y:0,
 	table: [
-		{Tag: "equipment", Value: ['supply', 'fan']},
-		{Tag: "substance", Value: "speed"},
-		{Tag: "type", Value: ['point', 'command']},
-		{Tag: "isPointOf", Value: "supplyfan1"},
-		{Tag: "site", Value: "small"},
-		{Tag: "id", Value: "speedcmd1"},
+		{Tag: "function", Value: "cooling"},
+		{Tag: "type", Value: ['equipment', 'HVAC', 'coil']},
+		{Tag: "id", Value: "clg-coil"},
 	]
 },
 {
 	x:0, y:0,
 	table: [
-		{Tag: "equipment", Value: ['supply', 'fan']},
-		{Tag: "substance", Value: "speed"},
-		{Tag: "type", Value: ['point', 'status']},
-		{Tag: "isPointOf", Value: "supplyfan1"},
-		{Tag: "site", Value: "small"},
-		{Tag: "id", Value: "speedstatus1"},
+		{Tag: "function", Value: "heating"},
+		{Tag: "type", Value: ['equipment', 'HVAC', 'coil']},
+		{Tag: "id", Value: "htg-coil"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "hasPart", Value: "room101"},
+		{Tag: "type", Value: ['location', 'HVAC', 'zone']},
+		{Tag: "id", Value: "zone"},
+	]
+},
+{
+	x:0, y:0,
+	table: [
+		{Tag: "type", Value: ['location', 'room']},
+		{Tag: "id", Value: "room101"},
 	]
 },
 ];

@@ -16,6 +16,12 @@ types:
         - Boiler:
             relationships:
                 - produces
+        - Coil:
+            function: [heating, cooling]
+            type: [dx, hydronic]
+            relationships:
+                - heatsWith
+                - coolsWith
         - Chiller:
             mechanism: [absorption, absorption, reciprocal, screw]
             relationships:
@@ -44,7 +50,8 @@ types:
         - Tank:
             subject: [gas, gasoline, oil, water]
         - Damper:
-            function: [discharge, supply, return, exhaust]
+            function: [discharge, supply, return, exhaust, mixed]
+            subject: [air]
         - Fan:
             frequency: [constant, variable]
             function: [discharge, supply, return, exhaust]

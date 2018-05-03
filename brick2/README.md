@@ -92,6 +92,12 @@
 
     The resulting document will create 2 supply fans each pointing to `AHU1A`
 
+### TODO: IFC HVAC Domain
+
+http://www.buildingsmart-tech.org/ifc/IFC4/Add2/html/link/ifchvacdomain.htm
+
+This actually defines quite a few helpful types and entities that we can use to populate some of the type system.
+
 ## Relationships
 
 - for relationships with reverse edges, only one of them needs to be populated

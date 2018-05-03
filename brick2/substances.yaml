@@ -3,6 +3,10 @@ Air:
     quantity: [temperature, static pressure, differential pressure, humidity, flow]
     function: [mixed, exhaust, outside, return, supply, discharge, entering, leaving]
 
+    #NOTE: these is really more a property of setpoints
+    hvac: [cooling, heating]
+    occupancy: [occupied, unoccupied]
+
 Water:
     quantity: [temperature, flow, pressure, differential pressure]
     function: [entering, leaving, return, supply, discharge]
@@ -32,3 +36,5 @@ Occupancy:
 Speed:
 Position:
     type: [on/off, on, off, start/stop, start, stop, percentage]
+Mode:
+    type: [HVAC, Lighting]

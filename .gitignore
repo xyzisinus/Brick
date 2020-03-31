@@ -1,6 +1,10 @@
 Brick_expanded.ttl
 history/
 
+# test files
+tests/*.json
+tests/*.ttl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -126,3 +130,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# pycharm
+.idea/
